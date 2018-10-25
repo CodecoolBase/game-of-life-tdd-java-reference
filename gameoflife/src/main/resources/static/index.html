@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game Of Life</title>
+    <style>
+        div {
+            white-space: pre;
+            border: 1px solid green;
+            width: fit-content;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+<button id="init">Init</button>
+<button id="next">Next</button>
+<div id="root"></div>
+<script>
+    let root = document.querySelector('#root');
+    let init = document.querySelector('#init');
+    let next = document.querySelector('#next');
+
+    init.addEventListener('click', evt => {
+        let data = {
+            // data: "   \n***\n   "
+            data:
+                "_*______\n" +
+                "__*_____\n" +
+                "***_____\n" +
+                "________\n" +
+                "________\n" +
+                "________\n" +
+                "________"
+        };
+        fetch("http://localhost:8080/init", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(data)
+        })
+            .then(() => root.textContent = "Game initialized")
+        .catch(reason => root.textContent = reason);
+    });
+
+    next.addEventListener('click', evt => {
+        fetch("http://localhost:8080/next")
+            .then(response => response.json())
+            .then(value => root.innerText = value.data)
+            .catch(reason => root.textContent = reason);
+    });
+
+</script>
+</body>
+</html>
