@@ -40,6 +40,7 @@ testing between layers
 * 1 vs 2 developers
 
 extra advantages of TDD: https://www.madetech.com/blog/9-benefits-of-test-driven-development
+
 advantages and disadvantages of TDD: https://www.testingexcellence.com/pros-cons-test-driven-development/
 
 TDD usage in 1 year "future-spective"
